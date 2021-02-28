@@ -30,18 +30,23 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.core.content.ContextCompat
 import androidx.palette.graphics.Palette
 import com.bumptech.glide.request.RequestOptions
 import com.example.androiddevchallenge.R
 import com.example.androiddevchallenge.data.BirdRepository
-import com.example.androiddevchallenge.model.Bird
 import com.example.androiddevchallenge.ui.theme.MyTheme
 import dev.chrisbanes.accompanist.glide.GlideImage
 
 @Composable
-fun ItemBird(bird: Bird) {
+fun ItemBird(
+    birdIndex: Int,
+    preferredImageSize: Dp = 120.dp,
+    onBirdClicked: (index: Int) -> Unit
+) {
+    val bird = BirdRepository.birds[birdIndex]
     val bitmap = BitmapFactory.decodeResource(
         LocalContext.current.resources, bird.pictureResId
     )
@@ -56,13 +61,13 @@ fun ItemBird(bird: Bird) {
         Column(
             horizontalAlignment = Alignment.CenterHorizontally,
             modifier = Modifier
-                .clickable(onClick = { })
+                .clickable(onClick = { onBirdClicked(birdIndex) })
                 .padding(PaddingValues(all = 16.dp))
         ) {
             GlideImage(
                 data = bird.pictureResId,
                 contentDescription = "Bird Image",
-                modifier = Modifier.size(120.dp),
+                modifier = Modifier.size(preferredImageSize),
                 requestBuilder = {
                     val options = RequestOptions()
                     options.circleCrop()
@@ -88,7 +93,6 @@ fun ItemBird(bird: Bird) {
 @Composable
 fun ItemBirdPreview() {
     MyTheme(darkTheme = true) {
-        val bird = BirdRepository.birds[2]
-        ItemBird(bird = bird)
+        ItemBird(2) { }
     }
 }

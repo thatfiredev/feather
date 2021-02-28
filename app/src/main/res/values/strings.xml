@@ -10,4 +10,9 @@
       the License.
       -->
     <string name="app_name">AndroidDevChallenge</string>
+    <string name="description_placeholder">%1$s is a very sweet and shy %2$s %3$s.
+        If you\'re looking for an independent bird, this %3$s would be the perfect match for you.
+        We would love to have you come meet %1$s and see this beautiful young bird spread their wings. </string>
+    <string name="similar_birds">Similar Birds</string>
+    <string name="action_adopt">ADOPT</string>
 </resources>

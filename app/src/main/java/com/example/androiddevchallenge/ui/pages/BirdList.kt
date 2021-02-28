@@ -24,6 +24,7 @@ import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
 import androidx.compose.material.TopAppBar
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
@@ -47,11 +48,12 @@ fun BirdList(navController: NavController) {
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun BirdGrid(navController: NavController) {
+    val birds = remember { BirdRepository.birds }
     LazyVerticalGrid(
         cells = GridCells.Fixed(2),
         contentPadding = PaddingValues(horizontal = 4.dp, vertical = 4.dp),
         content = {
-            itemsIndexed(BirdRepository.birds) { index, _ ->
+            itemsIndexed(birds) { index, _ ->
                 ItemBird(index) { _ ->
                     navController.navigate("birdDetails/$index")
                 }

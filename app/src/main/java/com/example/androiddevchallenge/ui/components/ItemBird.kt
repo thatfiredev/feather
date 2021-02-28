@@ -25,6 +25,7 @@ import androidx.compose.material.Card
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -46,7 +47,7 @@ fun ItemBird(
     preferredImageSize: Dp = 120.dp,
     onBirdClicked: (index: Int) -> Unit
 ) {
-    val bird = BirdRepository.birds[birdIndex]
+    val bird = remember { BirdRepository.birds[birdIndex] }
     val bitmap = BitmapFactory.decodeResource(
         LocalContext.current.resources, bird.pictureResId
     )
